@@ -1,81 +1,76 @@
-from data_extraction import *
-from sklearn.feature_extraction.text import TfidfVectorizer
+from cleaning_data import *
 
-#we need to find words from the dict_title and take their count from questions
+DF = {}
 
- #intersection of dict_title and dict_questions based on column "asin"
-# combined={}
+print("started tfidf data")
 
-# set_of_words = set(title_words.values())
+### creating columns of the tf-idf matrix ###
 
-# print(set_of_words)
+def creating_columns():
+    columns_tfidf = set()
+    for row in tokenize_stemmed_stopword_list_D:
+        for word in row:
+            columns_tfidf.add(word)
+    return columns_tfidf
 
+#calculate document frequency
+def cal_doc_freq(columns_tfidf):
+    # DF = {}
+    for word in columns_tfidf:
+        for i in range(len(tokenize_stemmed_stopword_list_Q)):
+            if (word in tokenize_stemmed_stopword_list_Q[i]):
+                try:
+                    DF[word].add(i)
+                except:
+                    DF[word] = {i}
+    for i in DF:
+        DF[i] = len(DF[i])
+    return DF
 
-numOfWordsA = dict.fromkeys(title_words, 0)
+def word_doc_freq(word):
+    c = 0
+    try:
+        c = DF[word]
+    except:
+        pass
+    return c
 
-for list_word in questions_words.values():
-    for word in list_word:
-        if title_words.__contains__(word.lower()):
-            print(word)
-            numOfWordsA[word.lower()] += 1
+#calculate document frequency for each word
+def cal_inv_doc_freq(columns_tfidf):
+    cal_doc_freq(columns_tfidf)
+    iDF = {}
+    for i in DF:
+        iDF[i] = np.log(len(tokenize_stemmed_stopword_list_Q) + 1 / (DF[i] + 1))
+    return iDF
 
-print(numOfWordsA)
+def term_freq():
+    term_freq_dict = dict()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    for index in range(len(tokenize_stemmed_stopword_list_Q)):
+        for word in columns_tfidf:
+            if word in tokenize_stemmed_stopword_list_Q[index]:
+                term_freq_dict.setdefault(index, []).append((word, tokenize_stemmed_stopword_list_Q[index].count(word)))
+    return term_freq_dict
 
 
+def cal_tf_idf():
+    tf_idf = dict()
+    for key, value in term_freq_dict.items():
+        for val in value:
+            tf_idf.setdefault(key, []).append((val[0], iDF[val[0]] * val[1]))
+    return tf_idf
 
-# from py4tfidf.vectorizer import Tfidf
-#
-# # print(dict_title)
-# #
-# #
-# # print(dict_questions)
-# key = dict_title.keys() & dict_questions.keys()
-# combined={}
-# for k in key:
-#     # print((dict_questions[k]))
-#     combined[k]=dict_questions[k]+dict_title[k]
-# #
-# # print(type(combined.values()))
-# # print(list(combined.values()))
-# final=[]
-# for key,value in combined.items():
-#     final.append(value)
-#
-# # print(final[7])
-# vec = Tfidf()
-# x_train = vec.vectorize_train(final)
-# # x_test = vec.vectorize_test(x_test)
-# print(vec)
+
+####calling the functions
+
+columns_tfidf = creating_columns()
+# print(len(columns_tfidf))
+# print(len(tokenize_stemmed_stopword_list_Q))
+iDF = cal_inv_doc_freq(columns_tfidf)
+term_freq_dict = term_freq()
+tf_idf = cal_tf_idf()
+print(len(tf_idf))
+
+
+print("ending tfidf data")
+
