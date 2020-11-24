@@ -6,15 +6,15 @@ from tfidf import *
 import numpy as np
 
 
-
 print("started cosine  distance")
 ## cal the tf-idf matrix :
 
 sorted(columns_tfidf)
+print(len(columns_tfidf))
 columns = list(columns_tfidf)
 
 
-D = np.zeros((len(tokenize_stemmed_stopword_list_Q), len(columns_tfidf)))
+D = np.zeros((len(cleaned_questions), len(columns_tfidf)))
 for key,values in tf_idf.items():
     # print(key)
     # print(values)
@@ -47,7 +47,7 @@ def gen_vector(tokens):
 
         tf = counter[token] / words_count
         df = word_doc_freq(token)
-        idf = math.log((len(tokenize_stemmed_stopword_list_Q) + 1) / (df + 1))
+        idf = math.log((len(cleaned_questions) + 1) / (df + 1))
 
         try:
             ind = columns.index(token)
@@ -74,12 +74,13 @@ def cosine_similarity(k, query):
     d_cosines = []
 
     query_vector = gen_vector(query)
+    
     print("len",len(query_vector))
     for d in D:
         d_cosines.append(cosine_sim(query_vector, d))
 
-    print(d_cosines)
-    out = np.array(d_cosines).argsort()[-k:][::-1]
+#     print(d_cosines)
+    out = np.array(d_cosines).argsort()[:k][::-1]
 
     print("")
 
@@ -87,5 +88,6 @@ def cosine_similarity(k, query):
     for o in out:
         print(df['question'][o])
 #
-Query = df["d_tokenized_stemmed_no_stopwords"][45]
+Query = cleaned_words[0]
 cosine_similarity(10,Query)
+print(Query)
