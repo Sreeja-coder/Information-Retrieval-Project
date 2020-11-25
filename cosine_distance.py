@@ -7,14 +7,11 @@ import numpy as np
 
 
 print("started cosine  distance")
-## cal the tf-idf matrix :
 
-sorted(columns_tfidf)
 print(len(columns_tfidf))
 columns = list(columns_tfidf)
-
-
 D = np.zeros((len(cleaned_questions), len(columns_tfidf)))
+
 for key,values in tf_idf.items():
     # print(key)
     # print(values)
@@ -32,9 +29,6 @@ for key,values in tf_idf.items():
             # print("in except")
             pass
 
-
-# print(columns.index("try"))
-
 def gen_vector(tokens):
     Q = np.zeros((len(columns)))
 
@@ -47,47 +41,64 @@ def gen_vector(tokens):
 
         tf = counter[token] / words_count
         df = word_doc_freq(token)
-        idf = math.log((len(cleaned_questions) + 1) / (df + 1))
+        idf = np.log((len(cleaned_questions)) / (df + 1))
 
         try:
-            ind = columns.index(token)
+            ind = columns.index(token.lower())
             Q[ind] = tf * idf
+            print(ind)
         except:
             pass
     return Q
 
-
-
 def cosine_sim(a, b):
-    cos_sim = np.dot(a, b)/(np.linalg.norm(a)*np.linalg.norm(b))
+    cos_sim = np.dot(a, b)/((np.linalg.norm(a)*np.linalg.norm(b))+1)
     return cos_sim
-#
-def cosine_similarity(k, query):
+
+
+def cosine_similarity(k1, query):
     print("Cosine Similarity")
-#     preprocessed_query = preprocess(query)
-#     tokens = word_tokenize(str(preprocessed_query))
+    #     preprocessed_query = preprocess(query)
+    #     tokens = word_tokenize(str(preprocessed_query))
 
     print("\nQuery:", query)
-#     print("")
-#     print(tokens)
+    #     print("")
+    #     print(tokens)
 
     d_cosines = []
 
     query_vector = gen_vector(query)
-    
-    print("len",len(query_vector))
+    # print(query_vector)
+
+    print("len", len(query_vector))
     for d in D:
         d_cosines.append(cosine_sim(query_vector, d))
 
-#     print(d_cosines)
-    out = np.array(d_cosines).argsort()[:k][::-1]
+    out = dict()
+    for i in range(len(d_cosines)):
+        out[i] = d_cosines[i]
+
+    out = dict(sorted(out.items(), key=lambda item: item[1]))
+
+    #     print(d_cosines)
+    #     out = np.array(d_cosines).argsort()
+    #     out=list(out)
+    #     out=out[-10:]
 
     print("")
-
     print(out)
-    for o in out:
-        print(df['question'][o])
-#
-Query = cleaned_words[0]
+    final_set = set()
+    for x in list(reversed(list(out)))[0:50]:
+       final_set.add(df['question'][x])
+    final_set = list(final_set)
+    for j in range(20):
+        print(j,":",final_set[j])
+
+
+# Query = cleaned_words[150]
+Query = query_tokenize("['Committed to present the best audio performance, DN-1000 is designed to be one of the finest earphones. By utilising the innovative Hybrid technology&quot; which drivers, it creates an amazing sound that is suitable for almost all music. Sound Signature: Natural rich bass with excellent treble extension and crystal clear clarity. Accessories: 10 sets of Eartips 1 pair of Earhook 3.5mm Female to 6.5mm Male Adapter 3.5mm Female to 2-pin Male Adapter Carry Box Soft leather Carry pouch Shirt Clip Technical Specification: Type: Dynamic Balanced Armature(10mm) Sound pressure level: 98+/-2dB Impedance: 10 Frequency Response: 16Hz-22KHz Noise Attenuation: 26dB Plug: 3.5mm Gold-Plated Cable Length: 1.20M']")
+
 cosine_similarity(10,Query)
 print(Query)
+
+print("endng cosine")
