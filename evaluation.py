@@ -83,15 +83,18 @@ if __name__ == "__main__":
     tokenizer = nltk.RegexpTokenizer(r"\w+")
     stop = stopwords.words('english')
     df = pd.read_csv('input_for_eval.csv')
+    print(df.head())
     df3_main = pd.read_csv('electronics1.csv', encoding='utf-8')
     ultimate_score  = []
     df3_main = df3_main[-200:]
     for i in df.index:
         asin = df.asin[i]
-        query = df.query[i]
+        # print("asin",asin)
+        query = df['query'][i]
+        # print("query",query)
         gen_questions = df.genQuestions[i]
-        x = df.loc[df['asin'] == str(asin)]
-        og_questions = x.question.tolist()
+        x = df3_main.loc[df3_main['asin'] == str(asin)]
+        og_questions = x['question'].tolist()
 
         og = []
         gen = []
