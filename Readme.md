@@ -1,11 +1,11 @@
-** FAQ Maker for Products **
+ FAQ Maker for Products 
 
 
-Project Scope:
+*Project Scope:
 
 ▪ Help create a question bank for a particular product description using the amazon Q/A and description dataset.
 
-Motivation:
+*Motivation:
 
 ▪ Understand the perspective of the Manufacturers/Sellers
 ▪ Manufactures need to have insight to the user’s perception of the product and other similar products in market.
