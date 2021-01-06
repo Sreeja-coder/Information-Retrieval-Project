@@ -1,4 +1,4 @@
-                                                # FAQ Maker for Products #
+    Markup: # FAQ Maker for Products #
 
 
 Project Scope:
