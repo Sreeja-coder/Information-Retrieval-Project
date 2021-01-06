@@ -14,7 +14,7 @@
 
 :small_blue_diamond: DataSet:
 
-Amazon Product Dataset[2] – It consists of product meta-data. \n
+Amazon Product Dataset[2] – It consists of product meta-data. <br/>
 Amazon Review/Rating Dataset[2] – It consists of product ratings, review and q/a for each product.
 We used the following features from the Datasets:
 ▪ ASIN (Product id)
