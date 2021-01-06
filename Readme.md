@@ -1,7 +1,7 @@
  FAQ Maker for Products 
 
 
-Project Scope:
+:small_blue_diamond: Project Scope:
 
 ▪ Help create a question bank for a particular product description using the amazon Q/A and description dataset.
 
