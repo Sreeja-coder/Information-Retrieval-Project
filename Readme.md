@@ -1,11 +1,11 @@
  FAQ Maker for Products 
 
 
-*Project Scope:
+Project Scope:
 
 ▪ Help create a question bank for a particular product description using the amazon Q/A and description dataset.
 
-*Motivation:
+Motivation:
 
 ▪ Understand the perspective of the Manufacturers/Sellers
 ▪ Manufactures need to have insight to the user’s perception of the product and other similar products in market.
@@ -23,5 +23,16 @@ We used the following features from the Datasets:
 ▪ Category
 ▪ Title
 ▪ Brand
-We used Electronics dataset to b
+We used Electronics dataset to build our model.
+
+Methodolgy:
+The developed IR model includes the following components:
+▪ Data Fetch and Pre-processing
+▪ Descriptions (Description, category, title, brand)
+▪ Question
+▪ Query
+▪ TF – IDF
+▪ Cosine Similarity and Ranking
+▪ BM25
+▪ Evaluation of this IR model will be discussed in the later sections.
 
