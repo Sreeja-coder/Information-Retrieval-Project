@@ -36,12 +36,6 @@ The developed IR model includes the following components:<br/>
 ▪ BM25<br/>
 ▪ Evaluation of this IR model will be discussed in the later sections.<br/>
 
-:blue_medium_small_square: Pre-processing:<br/>
-▪ Pre-processing means to bring the text into a form that is analyzable for our task<br/>
-▪ Pre-processing also helps removes noise from the data.<br/>
-▪ The steps in Pre-processing are:<br/>
-▪ Tokenization: Split a text into individual tokens<br/>
-▪ Stemming: Reducing inflected word to their base or root form.<br/>
-▪ Stop-words: Removing frequent unusual words, called stopwords.<br/>
-▪ Special characters and URL removal: Using Regex<br/>
-▪ POS tagging<br/>
+
+
+
