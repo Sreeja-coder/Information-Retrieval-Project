@@ -40,5 +40,5 @@ The developed IR model includes the following components:<br/>
 ▪ Evaluation of this IR model will be discussed in the later sections.<br/>
 
 
-
+![model](https://github.com/Sreeja-coder/Information-Retrieval-Project/blob/main/model.PNG)
 
