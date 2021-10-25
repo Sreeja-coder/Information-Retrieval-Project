@@ -42,3 +42,23 @@ The developed IR model includes the following components:<br/>
 
 ![model](https://github.com/Sreeja-coder/Information-Retrieval-Project/blob/main/model.PNG)
 
+:small_blue_diamond: Evaluation :<br/>
+We trained the model with 28795 questions and 2610 unique descriptions. <br>
+We tested the model for 20 unseen Queries from the dataset.  <br>
+We ran evaualtion by calculating semantic scores.
+▪ We calculated semantic similarity between:
+▪ Query and Cosine Generated Questions
+▪ Query and BM25 Generated Questions
+▪ Query and Original Questions
+
+The Scores for these evaluations are as follows:
+▪ Query Cosine = 0.865760
+▪ Query BM25 = 0.861166
+▪ Query Original = 0.141647
+
+Similarity score between Generated and Original Questions:
+▪ Cosine: 0.251
+▪ BM25: 0.252
+
+
+
