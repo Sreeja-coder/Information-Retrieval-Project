@@ -1,5 +1,8 @@
  ### FAQ Maker for Products 
 
+:small_blue_diamond: Introduction: <br/>
+In the era of e-commerce , the manufactures needs to have insights into the user's perception of the product & other similar products in the market. <br>
+This requires a resourceful product description and a Q & A. This can be done by collecting all the past historical information from Amazon's Q & A dataset for smilar products and retrieving frequently asked questions; thus covering ground while describing the sellers new product or encompassing most of the questions that users look for.
 
 :small_blue_diamond: Project Scope: <br/>
 
